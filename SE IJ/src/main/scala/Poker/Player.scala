@@ -1,4 +1,0 @@
-package Poker
-
-object Player {
-}
