@@ -19,16 +19,16 @@ case class Card(rank: Int, suit: Int) {
       case 13 => s = "Ace"
       case _ =>
         println("INVALID CARD RANK")
-        return ""
+        return s
     }
     suit match {
-      case 1 => return s + " of Clubs"      // Kreuz
-      case 2 => return s + " of Spades"     // Pik
-      case 3 => return s + " of Hearts"     // Herz
-      case 4 => return s + " of Diamonds"   // Karo
+      case 1 => s + " of Clubs"      // Kreuz
+      case 2 => s + " of Spades"     // Pik
+      case 3 => s + " of Hearts"     // Herz
+      case 4 => s + " of Diamonds"   // Karo
       case _ =>
         println("INVALID CARD SUIT")
-        ""
+        s
     }
   }
 }
