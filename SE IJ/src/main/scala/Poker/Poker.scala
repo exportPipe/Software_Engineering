@@ -4,8 +4,9 @@ object Poker {
   def main(args: Array[String]): Unit = {
     println("Texas Holdem Poker")
 
-    val testcard = Card(12, 3)
-    print(testcard.toString)
+    val testdeck = new CardDeck
+    testdeck.fillDeck
+    print(testdeck.deck(3).toString)
 
 
   }
