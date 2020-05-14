@@ -10,7 +10,6 @@ case class CardDeck() {
     for (x <- 1.to(13)) {
       for (y <- 1.to(4)) {
         deck(count) = Card(x, y)
-        count += 1
       }
     }
   }
