@@ -41,10 +41,11 @@ case class CardDeck() {
 
   def fillDeck = {
     var count = 0
-    for (x <- 1.to(13)) {
-      for (y <- 1.to(4)) {
-        deck.update(count, Card(x, y))
-
+    for (x <- 1.until(13)) {
+      for (y <- 1.until(4)) {
+        print(x, y)
+        deck(count) = Card(x, y)
+        count += 1
       }
     }
   }

@@ -6,7 +6,7 @@ object Poker {
 
     val testdeck = new CardDeck
     testdeck.fillDeck
-    print(testdeck.deck(5).toString)
+
 
 
   }
