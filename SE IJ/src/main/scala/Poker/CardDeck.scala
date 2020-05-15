@@ -2,18 +2,12 @@ package Poker
 
 case class CardDeck() {
 
-  def deck: Array[Card] = new Array[Card](52)
+  val deck: IndexedSeq[Card] = for {
+    rank <- 1.to(13)
+    suit <- 1.to(4)
+  } yield Card(rank, suit)
+
   def restDeck = 0
 
-  def fillDeck(): Unit = {
-    var count = 0
-    for (x <- 1.to(13)) {
-      for (y <- 1.to(4)) {
-
-        print(x, y)
-        count += 1
-      }
-      println
-    }
-  }
 }
+
