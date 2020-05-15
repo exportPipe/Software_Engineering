@@ -18,7 +18,7 @@ case class Card(rank: Int, suit: Int) {
       case 13 => s = "Ace"
       case _ =>
         println("INVALID CARD RANK")
-        return s
+        return ""
     }
     suit match {
       case 1 => s + " of Clubs"      // Kreuz
@@ -36,23 +36,5 @@ case class Card(rank: Int, suit: Int) {
 case class CardDeck() {
 
 
-  def deck: Array[Card] = new Array[Card](52)
-  def restDeck = 0;
-
-  def fillDeck = {
-    var count = 0
-    for (x <- 1.until(13)) {
-      for (y <- 1.until(4)) {
-        print(x, y)
-        deck(count) = Card(x, y)
-        count += 1
-      }
-    }
-  }
-
 
 }
-
-var cd = new CardDeck
-cd.fillDeck
-cd.deck(1)
