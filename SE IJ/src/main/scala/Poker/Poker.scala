@@ -9,11 +9,8 @@ object Poker {
     testdeck.mixCards()
     for (i <- 0 to 51)
       println(testdeck.drawCard().toString)
+    val tui = new TUI
+    val player: Array[Player] = tui.initPlayer()
 
-    // Testing continues indexing
-    val p1 = new Player()
-    val p2 = new Player()
-    val p3 = new Player()
-    print(p2.id)
   }
 }
