@@ -14,9 +14,32 @@ case class TUI() {
     player
   }
 
+  def getChoice: Int = {
+    val input = scala.io.StdIn.readLine().split(" ")
+    input(0) match {
+      case "h" => -1
+      case "call" => 1
+      case "check" => 2
+      case "fold" => 3
+      case "raise" => input(1).toInt
+      case _ =>
+        println("wrong input\n")
+        getChoice
+    }
+  }
+
   def printVars(gameTable: GameTable): Unit = {
-    for (i <- gameTable.player.indices)
-      print(s"\n${gameTable.player(i)} (aktiv: ${gameTable.player(i).isActive}):" +
-        s"\t${gameTable.player(i).credit} credits\tcurrent bet: ${gameTable.player(i).currBet} credits")
+    for (i <- gameTable.player.indices) {
+      print(s"\n${gameTable.player(i)} (aktiv: ${gameTable.player(i).active})" +
+        s"\t${gameTable.player(i).credit} credits\t(current bet: ${gameTable.player(i).currBet} credits)")
+      if (gameTable.player(i).id.equals(gameTable.choicePlayer.id)) print(" (*)")
+    }
+  }
+
+  def printHelp(): Unit = {
+    println("---\toptions:\ncall\t->\tmatch the current bet amount made by a previous player " +
+      "(if equal, automatic check instead)\ncheck\t->\tpass the action to the next player " +
+      "(if bet amount equal to previous)\nfold\t->\tdiscard your hand and become inactive for this round" +
+      "\nraise <amount>\t->\traise to a specified integer amount\n")
   }
 }

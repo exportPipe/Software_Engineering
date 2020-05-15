@@ -10,14 +10,12 @@ object Poker {
     for (i <- 0 to 51)
       println(cardDeck.drawCard().toString)
 
-    // TUI for early game controll
+    // TUI for early game control
     val tui = new TUI
     // Player
     val player: Array[Player] = tui.initPlayer()
     // GameTable -> controll flow
     val gameTable = new GameTable(player, cardDeck, tui)
     gameTable.startRound()
-
-
   }
 }
