@@ -11,9 +11,9 @@ case class CardDeck() {
       for (y <- 1.to(4)) {
 
         print(x, y)
-        deck(count) = Card(x, y)
+        count += 1
       }
+      println
     }
   }
 }
-
