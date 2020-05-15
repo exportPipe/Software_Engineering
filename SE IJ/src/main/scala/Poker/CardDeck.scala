@@ -9,6 +9,7 @@ case class CardDeck() {
     var count = 0
     for (x <- 1.to(13)) {
       for (y <- 1.to(4)) {
+        print(x, y)
         deck(count) = Card(x, y)
       }
     }
