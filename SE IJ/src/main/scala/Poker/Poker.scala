@@ -9,9 +9,9 @@ object Poker {
     println(testcard.toString)
     // String representation of a deck
     val testdeck = new CardDeck
-    println(
-      testdeck.deck(1).toString
-    )
+    for(i <- 0.to(51)) {
+      println(testdeck.deck(i))
+    }
 
 
 
