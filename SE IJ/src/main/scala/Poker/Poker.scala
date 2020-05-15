@@ -12,8 +12,5 @@ object Poker {
     for(i <- 0.to(51)) {
       println(testdeck.deck(i))
     }
-
-
-
   }
 }
