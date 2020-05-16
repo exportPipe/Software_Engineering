@@ -34,6 +34,7 @@ case class TUI() {
         s"\t${gameTable.player(i).credit} credits\t(current bet: ${gameTable.player(i).currBet} credits)")
       if (gameTable.player(i).id.equals(gameTable.choicePlayer.id)) print(" (*)")
     }
+    println(s"\nPot: ${gameTable.pot}")
   }
 
   def printHelp(): Unit = {

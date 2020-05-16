@@ -9,6 +9,7 @@ class GameTable (playerGT: Array[Player], cardsGT: CardDeck, tui: TUI) {
   var smallBlind: Player = player(0)
   var bigBlind: Player = nextActive(smallBlind)
   var choicePlayer: Player = nextActive(bigBlind)
+  val options: GameOptions = GameOptions(this)
 
   def nextActive(currPlayer: Player): Player = {
     val idx = currPlayer.id % player.length
@@ -24,14 +25,13 @@ class GameTable (playerGT: Array[Player], cardsGT: CardDeck, tui: TUI) {
       if (player(player.length - 1).active) return player(player.length - 1)
       else beforeActive(player(player.length - 1))
     }
-
     if (player(idx - 1).active) return player(idx - 1)
     beforeActive(player(idx - 1))
   }
 
   def startRound(): Boolean = {
     checkPlayerCredits()
-    if (!bet(smallBlind, $S) || !bet(bigBlind, $B)) return false
+    if (!options.bet(smallBlind, $S) || !options.bet(bigBlind, $B)) return false
     tui.printVars(this)
     roundManager()
     true
@@ -54,53 +54,14 @@ class GameTable (playerGT: Array[Player], cardsGT: CardDeck, tui: TUI) {
     val pick = tui.getChoice
     pick match {
       case -1 => tui.printHelp()
-      case 1 => return call(player)
-      case 2 => return check(player)
-      case 3 => return fold(player)
-      case _ => return raise(player, pick)
+      case 1 => return options.call(player)
+      case 2 => return options.check(player)
+      case 3 => return options.fold(player)
+      case _ => return options.raise(player, pick)
     }
      false
   }
-  // ---------------------------------------------------------------------- CALL / CHECK / FOLD / RAISE / BET
-  def call(player: Player): Boolean = {
-    if (beforeActive(player).currBet.equals(player.currBet)) {
-      println("check instead")
-      check(player: Player)
-    } else if (bet(player, beforeActive(player).currBet - player.currBet)) {
-      return true
-    }
-    false
-  }
 
-  def check(player: Player): Boolean = {
-    if (beforeActive(player).currBet <= player.currBet) {
-      return true
-    }
-    println("! You got the option call, fold or raise")
-    false
-  }
-
-  def fold(player: Player): Boolean = {
-    player.active = false
-    true
-  }
-
-  def raise(player: Player, $amount: Int): Boolean = {
-    if (((beforeActive(player).currBet * 2) <= $amount) && ($amount >= $B )) {
-      if (bet(player, $amount - player.currBet)) return true
-    }
-    println("! You cannot bet this amount")
-    false
-
-  }
-
-  def bet(player: Player, amount: Int): Boolean = {
-    if (amount >= player.credit) return false
-    player.credit -= amount
-    player.currBet += amount
-    true
-  }
-// -----------------------------------------------------------------------------------
   def checkPlayerCredits(): Unit = {
     for (x <- player)
       if (x.credit <= 0) x.active = false
