@@ -19,12 +19,13 @@ class GameTable (playerGT: Array[Player], cardsGT: CardDeck, tui: TUI) {
   }
 
   def beforeActive(currPlayer: Player) : Player = {
-    var idx = currPlayer.id - 1
-    if ((idx - 1) <= 0) beforeActive(player(player.length - 1))
-    if (idx - 1 <= 0) idx = player.length - 1
-    if (player(idx - 1).active) {
-      return player(idx - 1)
+    val idx = currPlayer.id - 1
+    if (idx.equals(0)) {
+      if (player(player.length - 1).active) return player(player.length - 1)
+      else beforeActive(player(player.length - 1))
     }
+
+    if (player(idx - 1).active) return player(idx - 1)
     beforeActive(player(idx - 1))
   }
 
@@ -38,8 +39,8 @@ class GameTable (playerGT: Array[Player], cardsGT: CardDeck, tui: TUI) {
 
   def roundManager(): Boolean = {
     if(getPlayersInput(choicePlayer)) {
-      tui.printVars(this)
       choicePlayer = nextActive(choicePlayer)
+      tui.printVars(this)
       roundManager()
     } else {
       tui.printVars(this)

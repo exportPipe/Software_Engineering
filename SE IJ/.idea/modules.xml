@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Poker.iml" filepath="$PROJECT_DIR$/.idea/modules/Poker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SE IJ.iml" filepath="$PROJECT_DIR$/.idea/modules/SE IJ.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/SE IJ-build.iml" filepath="$PROJECT_DIR$/.idea/modules/SE IJ-build.iml" />
     </modules>
   </component>
