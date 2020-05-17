@@ -37,7 +37,6 @@ class GameTable (playerGT: Array[Player], cardsGT: CardDeck, tui: TUI) {
   }
 
   def roundManager(): Boolean = {
-
     if(getPlayersInput(choicePlayer)) {
       choicePlayer = nextActive(choicePlayer)
       tui.printVars(this)
