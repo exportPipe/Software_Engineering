@@ -5,7 +5,7 @@ case class GameOptions(gameTable: GameTable) {
   def call(player: Player): Boolean = {
     if (gameTable.beforeActive(player).currBet.equals(player.currBet)) {
       println("check instead")
-      check(player: Player)
+      return check(player: Player)
     } else if (bet(player, gameTable.beforeActive(player).currBet - player.currBet)) {
       return true
     }
@@ -31,7 +31,6 @@ case class GameOptions(gameTable: GameTable) {
     }
     println("! You cannot bet this amount")
     false
-
   }
 
   def bet(player: Player, amount: Int): Boolean = {

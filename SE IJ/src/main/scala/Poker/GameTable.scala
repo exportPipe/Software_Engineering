@@ -21,9 +21,12 @@ class GameTable (playerGT: Array[Player], cardsGT: CardDeck, tui: TUI) {
 
   def beforeActive(currPlayer: Player) : Player = {
     val idx = currPlayer.id - 1
-    if (idx.equals(0)) {
-      if (player(player.length - 1).active) return player(player.length - 1)
-      else beforeActive(player(player.length - 1))
+    if (idx <= 0) {
+      if (!player.last.active) {
+        beforeActive(player.last)
+      } else {
+        return player.last
+      }
     }
     if (player(idx - 1).active) return player(idx - 1)
     beforeActive(player(idx - 1))
@@ -66,6 +69,4 @@ class GameTable (playerGT: Array[Player], cardsGT: CardDeck, tui: TUI) {
     for (x <- player)
       if (x.credit <= 0) x.active = false
   }
-
-
 }
