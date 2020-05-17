@@ -10,13 +10,14 @@ case class TUI() {
     )
     val player: Array[Player] = new Array[Player](numberPlayer)
     for (i <- 0 until numberPlayer)
-      player(i) = Player()
+      player(i) = Player(holeCardsA = new Array[Card](2))
     player
   }
 
   def getChoice: Int = {
     val input = scala.io.StdIn.readLine().split(" ")
     input(0) match {
+      case "q" => -2
       case "h" => -1
       case "call" => 1
       case "check" => 2
@@ -28,11 +29,11 @@ case class TUI() {
     }
   }
 
-
   def printVars(gameTable: GameTable): Unit = {
     for (i <- gameTable.player.indices) {
       print(s"\n${gameTable.player(i)} (aktiv: ${gameTable.player(i).active})" +
-        s"\t${gameTable.player(i).credit} credits\t(current bet: ${gameTable.player(i).currBet} credits)")
+        s"\t${gameTable.player(i).credit} credits\t(current bet: ${gameTable.player(i).currBet} credits)\t")
+      print(s"${gameTable.player(i).holeCardsA(0)}, ${gameTable.player(i).holeCardsA(1)}")
       if (gameTable.player(i).id.equals(gameTable.choicePlayer.id)) print(" (*)")
     }
     println(s"\nPot: ${gameTable.pot}\tbefore active: ${gameTable.beforeActive(gameTable.choicePlayer)}" +

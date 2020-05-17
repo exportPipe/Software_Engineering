@@ -29,6 +29,10 @@ class GameTable (playerGT: Array[Player], cardsGT: CardDeck, tui: TUI) {
   }
 
   def startRound(): Boolean = {
+    for (plr <- player) {
+      plr.holeCardsA(0) = cards.drawCard()
+      plr.holeCardsA(1) = cards.drawCard()
+    }
     checkPlayerCredits()
     if (!options.bet(smallBlind, $S) || !options.bet(bigBlind, $B)) return false
     tui.printVars(this)
@@ -52,6 +56,7 @@ class GameTable (playerGT: Array[Player], cardsGT: CardDeck, tui: TUI) {
     printf("\nEnter \"h\" for help\n")
     val pick = tui.getChoice
     pick match {
+      case -2 => System.exit(0)
       case -1 => tui.printHelp()
       case 1 => return options.call(player)
       case 2 => return options.check(player)
