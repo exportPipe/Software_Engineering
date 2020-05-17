@@ -13,23 +13,19 @@ class GameTable (playerGT: Array[Player], cardsGT: CardDeck, tui: TUI) {
 
   def nextActive(currPlayer: Player): Player = {
     val idx = currPlayer.id % player.length
-    while (!player(idx).active) {
-      nextActive(player(idx))
-    }
-    player(idx)
+    if (player(idx).active) return player(idx)
+    nextActive(player(idx))
   }
 
   def beforeActive(currPlayer: Player) : Player = {
     val idx = currPlayer.id - 1
-    if (idx <= 0) {
-      if (!player.last.active) {
-        beforeActive(player.last)
-      } else {
+    if ((idx - 1) < 0) {
+      if (player.last.active) {
         return player.last
-      }
+      } else return beforeActive(player.last)
     }
-    if (player(idx - 1).active) return player(idx - 1)
-    beforeActive(player(idx - 1))
+    if (!player(idx - 1).active) return beforeActive(player(idx - 1))
+    player (idx - 1)
   }
 
   def startRound(): Boolean = {
@@ -41,6 +37,7 @@ class GameTable (playerGT: Array[Player], cardsGT: CardDeck, tui: TUI) {
   }
 
   def roundManager(): Boolean = {
+
     if(getPlayersInput(choicePlayer)) {
       choicePlayer = nextActive(choicePlayer)
       tui.printVars(this)

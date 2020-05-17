@@ -15,7 +15,6 @@ case class TUI() {
   }
 
   def getChoice: Int = {
-    println("in getChoice")
     val input = scala.io.StdIn.readLine().split(" ")
     input(0) match {
       case "h" => -1
@@ -29,13 +28,15 @@ case class TUI() {
     }
   }
 
+
   def printVars(gameTable: GameTable): Unit = {
     for (i <- gameTable.player.indices) {
       print(s"\n${gameTable.player(i)} (aktiv: ${gameTable.player(i).active})" +
         s"\t${gameTable.player(i).credit} credits\t(current bet: ${gameTable.player(i).currBet} credits)")
       if (gameTable.player(i).id.equals(gameTable.choicePlayer.id)) print(" (*)")
     }
-    println(s"\nPot: ${gameTable.pot}\tbefore active: ${gameTable.beforeActive(gameTable.choicePlayer)}")
+    println(s"\nPot: ${gameTable.pot}\tbefore active: ${gameTable.beforeActive(gameTable.choicePlayer)}" +
+      s" (with ${gameTable.beforeActive(gameTable.choicePlayer).currBet})")
   }
 
   def printHelp(): Unit = {

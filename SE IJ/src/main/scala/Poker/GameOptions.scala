@@ -5,19 +5,12 @@ case class GameOptions(gameTable: GameTable) {
   def call(player: Player): Boolean = {
     if (gameTable.beforeActive(player).currBet.equals(player.currBet)) {
       println("check instead")
-      return check(player: Player)
-    } else if (bet(player, gameTable.beforeActive(player).currBet - player.currBet)) {
-      return true
-    }
-    false
+      check(player: Player)
+    } else bet(player, gameTable.beforeActive(player).currBet - player.currBet)
   }
 
   def check(player: Player): Boolean = {
-    if (gameTable.beforeActive(player).currBet <= player.currBet) {
-      return true
-    }
-    println("! You got the option call, fold or raise")
-    false
+    gameTable.beforeActive(player).currBet <= player.currBet
   }
 
   def fold(player: Player): Boolean = {
@@ -26,8 +19,8 @@ case class GameOptions(gameTable: GameTable) {
   }
 
   def raise(player: Player, $amount: Int): Boolean = {
-    if (((gameTable.beforeActive(player).currBet * 2) <= $amount) && ($amount >= gameTable.$B )) {
-      if (bet(player, $amount - player.currBet)) return true
+    if ((((gameTable beforeActive player).currBet * 2) <= $amount) && ($amount >= gameTable.$B )) {
+      return(bet(player, $amount - player.currBet))
     }
     println("! You cannot bet this amount")
     false
