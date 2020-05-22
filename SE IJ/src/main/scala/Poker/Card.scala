@@ -1,6 +1,6 @@
 package Poker
 
-case class Card(rank: Int, suit: Int) {
+case class Card(rank: Int, suit: Int) extends Comparable[Card] {
   override def toString: String = {
     var s = ""
     rank match {
@@ -31,4 +31,6 @@ case class Card(rank: Int, suit: Int) {
         s
     }
   }
+
+  override def compareTo(o: Card): Int = this.rank - o.rank
 }
