@@ -15,7 +15,7 @@ case class TUI() {
   }
 
   def nrRounds: Int = {
-    printf("Enter number of rounds")
+    println("\nEnter number of rounds")
     scala.io.StdIn.readInt()
   }
 
