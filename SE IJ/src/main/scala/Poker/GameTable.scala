@@ -10,6 +10,8 @@ class GameTable (playerGT: Array[Player], cardsGT: CardDeck, tui: TUI) {
   var bigBlind: Player = nextActive(smallBlind)
   var choicePlayer: Player = nextActive(bigBlind)
   val options: GameOptions = GameOptions(this)
+  val numberRounds: Int = tui.nrRounds
+  var count = 0
 
   def nextActive(currPlayer: Player): Player = {
     val idx = currPlayer.id % player.length
@@ -41,15 +43,18 @@ class GameTable (playerGT: Array[Player], cardsGT: CardDeck, tui: TUI) {
   }
 
   def roundManager(): Boolean = {
-    if(getPlayersInput(choicePlayer)) {
-      choicePlayer = nextActive(choicePlayer)
-      tui.printVars(this)
-      roundManager()
-    } else {
-      tui.printVars(this)
-      roundManager()
+    while (count < numberRounds) {
+      if(getPlayersInput(choicePlayer)) {
+        choicePlayer = nextActive(choicePlayer)
+        count += 1
+        tui.printVars(this)
+        roundManager()
+      } else {
+        tui.printVars(this)
+        roundManager()
+      }
     }
-    false
+    true
   }
 
   def getPlayersInput(player: Player): Boolean = {

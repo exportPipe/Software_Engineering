@@ -14,6 +14,11 @@ case class TUI() {
     player
   }
 
+  def nrRounds: Int = {
+    printf("Enter number of rounds")
+    scala.io.StdIn.readInt()
+  }
+
   def getChoice: Int = {
     val input = scala.io.StdIn.readLine().split(" ")
     input(0) match {
