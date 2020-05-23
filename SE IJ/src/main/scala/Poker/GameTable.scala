@@ -4,12 +4,14 @@ class GameTable (player: Array[Player], cards: CardDeck, tui: TUI) {
   var $S: Int = 10
   var $B: Int = 20
   var pot = 0
-  var smallBlind: Player = player(0)
+  def getPlayer: Array[Player] = player
+  var smallBlind: Player = getPlayer(0)
   var bigBlind: Player = nextActive(smallBlind)
   var choicePlayer: Player = nextActive(bigBlind)
-  val options: GameOptions = GameOptions(this)
+  def options: GameOptions = GameOptions(this)
   val numberRounds: Int = tui.nrRounds
   var count = 0
+
 
   def nextActive(currPlayer: Player): Player = {
     val idx = currPlayer.id % player.length
@@ -29,10 +31,7 @@ class GameTable (player: Array[Player], cards: CardDeck, tui: TUI) {
   }
 
   def startRound(): Boolean = {
-    for (plr <- player) {
-      plr.holeCardsA(0) = cards.drawCard
-      plr.holeCardsA(1) = cards.drawCard
-    }
+    for (plr <- player) plr.setHoleCards(List(cards.drawCard, cards.drawCard))
     checkPlayerCredits()
     if (!options.bet(smallBlind, $S) || !options.bet(bigBlind, $B)) return false
     tui.printVars(this)

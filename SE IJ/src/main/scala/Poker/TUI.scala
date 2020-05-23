@@ -8,10 +8,9 @@ case class TUI() {
     printf(
       "Game starts with %d player", numberPlayer
     )
-    val player: Array[Player] = new Array[Player](numberPlayer)
-    for (i <- 0 until numberPlayer)
-      player(i) = Player(holeCardsA = new Array[Card](2))
-    player
+    var plr = new Array[Player](numberPlayer)
+    for (i <- 0.until(numberPlayer)) plr(i) = new Player()
+    plr
   }
 
   def nrRounds: Int = {
@@ -37,11 +36,11 @@ case class TUI() {
   }
 
   def printVars(gameTable: GameTable): Unit = {
-    for (i <- gameTable.player.indices) {
-      print(s"\n${gameTable.player(i)} (aktiv: ${gameTable.player(i).getActive})" +
-        s"\t${gameTable.player(i).getCredit} credits\t(current bet: ${gameTable.player(i).getCurrBet} credits)\t")
-      print(s"${gameTable.player(i).holeCardsA(0)}, ${gameTable.player(i).holeCardsA(1)}")
-      if (gameTable.player(i).id.equals(gameTable.choicePlayer.id)) print(" (*)")
+    for (plr <- gameTable.getPlayer) {
+      print(s"\n$plr (aktiv: ${plr.getActive})" +
+        s"\t${plr.getCredit} credits\t(current bet: ${plr.getCurrBet} credits)\t")
+      print(s"${plr.getHoleCards}")
+      if (plr.id.equals(gameTable.choicePlayer.id)) print("\t(*)")
     }
     println(s"\nPot: ${gameTable.pot}\tbefore active: ${gameTable.beforeActive(gameTable.choicePlayer)}" +
       s" (with ${gameTable.beforeActive(gameTable.choicePlayer).getCurrBet})")
