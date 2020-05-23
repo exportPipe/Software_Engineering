@@ -5,6 +5,10 @@ object Poker {
     println("Texas Holdem Poker by Niklas and Paul")
     // String representation of a deck
     val cardDeck = new CardDeck
+
+    for (i <- 0 to 51) println {
+      cardDeck.drawCard
+    }
     // TUI for early game control
     val tui = new TUI
     // Player

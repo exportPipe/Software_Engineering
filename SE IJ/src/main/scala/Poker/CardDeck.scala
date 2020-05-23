@@ -9,7 +9,8 @@ case class CardDeck() {
 
   var cards: List[Card] = List.from(util.Random.shuffle(cardSeq))
 
-  def drawCard(): Card = {
+  def drawCard: Card = {
+    if (cards.equals(Nil)) cards = List.from(util.Random.shuffle(cardSeq))
     val ret = cards.head
     cards = cards.tail
     ret

@@ -1,10 +1,8 @@
 package Poker
 
-class GameTable (playerGT: Array[Player], cardsGT: CardDeck, tui: TUI) {
-  def player: Array[Player] = playerGT
-  def cards: CardDeck = cardsGT
-  def $S: Int = 10
-  def $B: Int = 20
+class GameTable (player: Array[Player], cards: CardDeck, tui: TUI) {
+  var $S: Int = 10
+  var $B: Int = 20
   var pot = 0
   var smallBlind: Player = player(0)
   var bigBlind: Player = nextActive(smallBlind)
@@ -32,8 +30,8 @@ class GameTable (playerGT: Array[Player], cardsGT: CardDeck, tui: TUI) {
 
   def startRound(): Boolean = {
     for (plr <- player) {
-      plr.holeCardsA(0) = cards.drawCard()
-      plr.holeCardsA(1) = cards.drawCard()
+      plr.holeCardsA(0) = cards.drawCard
+      plr.holeCardsA(1) = cards.drawCard
     }
     checkPlayerCredits()
     if (!options.bet(smallBlind, $S) || !options.bet(bigBlind, $B)) return false
