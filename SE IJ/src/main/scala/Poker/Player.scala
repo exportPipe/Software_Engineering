@@ -1,11 +1,15 @@
 package Poker
 
-case class Player($credit: Int = 500, $currBet: Int = 0, isActive: Boolean = true, holeCardsA: Array[Card]) {
-  val id: Int = Player.newID
-  var credit: Int = $credit
-  var currBet: Int = $currBet
-  var active: Boolean = isActive
+case class Player(var $credit: Int = 500, var $currBet: Int = 0, var isActive: Boolean = true, holeCardsA: Array[Card]) {
 
+  val id: Int = Player.newID
+  def setCredit(credit: Int): Unit = $credit = credit
+  def setCurrBet(currBet: Int): Unit = $currBet = currBet
+  def setActive(active: Boolean): Unit = isActive = active
+
+  def getCredit: Int = $credit
+  def getCurrBet: Int = $currBet
+  def getActive: Boolean = isActive
   override def toString: String = s"Player $id"
 }
 object Player {

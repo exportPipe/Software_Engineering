@@ -1,0 +1,18 @@
+import Poker.Card
+import org.scalatest._
+
+class CardSpec extends WordSpec with Matchers {
+  "A Card" when {
+    "new" should {
+      val card = Card(7, 3)
+      "have toString" in {
+        card.toString should be ("Eight of Hearts")
+      }
+      "compares to another card" should {
+        card.compareTo(Card(6, 3)) should be (1)
+        card.compareTo(Card(8, 1)) should be (-2)
+        card.compareTo(Card(13, 4)) should be (-6)
+      }
+    }
+  }
+}

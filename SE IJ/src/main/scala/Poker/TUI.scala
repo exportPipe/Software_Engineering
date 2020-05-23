@@ -27,7 +27,9 @@ case class TUI() {
       case "call" => 1
       case "check" => 2
       case "fold" => 3
-      case "raise" => input(1).toInt
+      case "raise" =>
+        if (input(1).toInt > 3) return input(1).toInt
+        getChoice
       case _ =>
         println("wrong input\n")
         getChoice
@@ -36,13 +38,13 @@ case class TUI() {
 
   def printVars(gameTable: GameTable): Unit = {
     for (i <- gameTable.player.indices) {
-      print(s"\n${gameTable.player(i)} (aktiv: ${gameTable.player(i).active})" +
-        s"\t${gameTable.player(i).credit} credits\t(current bet: ${gameTable.player(i).currBet} credits)\t")
+      print(s"\n${gameTable.player(i)} (aktiv: ${gameTable.player(i).getActive})" +
+        s"\t${gameTable.player(i).getCredit} credits\t(current bet: ${gameTable.player(i).getCurrBet} credits)\t")
       print(s"${gameTable.player(i).holeCardsA(0)}, ${gameTable.player(i).holeCardsA(1)}")
       if (gameTable.player(i).id.equals(gameTable.choicePlayer.id)) print(" (*)")
     }
     println(s"\nPot: ${gameTable.pot}\tbefore active: ${gameTable.beforeActive(gameTable.choicePlayer)}" +
-      s" (with ${gameTable.beforeActive(gameTable.choicePlayer).currBet})")
+      s" (with ${gameTable.beforeActive(gameTable.choicePlayer).getCurrBet})")
   }
 
   def printHelp(): Unit = {
