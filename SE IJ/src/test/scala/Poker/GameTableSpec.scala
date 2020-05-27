@@ -4,7 +4,7 @@ import org.scalatest._
 import org.scalatest.matchers.should.Matchers
 
 class GameTableSpec extends WordSpec with Matchers {
-  "Some GameOptions" when {
+  "A GameTable" when {
     "new" should {
       val cd = new CardDeck
       val tui = new TUI
@@ -12,7 +12,7 @@ class GameTableSpec extends WordSpec with Matchers {
       val gameTable = new GameTable(plr, cd, tui)
       val options = GameOptions(gameTable)
 
-      "should have the right vars" in {
+      "should have player" in {
         gameTable.smallBlind should be (plr(0))
         gameTable.choicePlayer should be (plr(2))
         gameTable.nextActive(plr(0)) should be (plr(1))
