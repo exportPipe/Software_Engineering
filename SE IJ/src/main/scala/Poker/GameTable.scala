@@ -9,9 +9,8 @@ class GameTable (player: Array[Player], cards: CardDeck, tui: TUI) {
   var bigBlind: Player = nextActive(smallBlind)
   var choicePlayer: Player = nextActive(bigBlind)
   def options: GameOptions = GameOptions(this)
-  val numberRounds: Int = tui.nrRounds
+  val numberRounds: Int = 10 // tui.nrRounds
   var count = 0
-
 
   def nextActive(currPlayer: Player): Player = {
     val idx = currPlayer.id % player.length

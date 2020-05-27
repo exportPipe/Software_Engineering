@@ -9,6 +9,7 @@ object Poker {
     for (i <- 0 to 51) println {
       cardDeck.drawCard
     }
+    cardDeck.reNew()
     // TUI for early game control
     val tui = new TUI
     // Player
