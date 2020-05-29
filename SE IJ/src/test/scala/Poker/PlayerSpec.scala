@@ -15,7 +15,7 @@ class PlayerSpec extends WordSpec with Matchers {
         "Player has vars" in {
           plr1.getActive should be (true)
           plr2.getCredit should be (500)
-          plr1.getCurrBet should be 0
+          plr1.getCurrBet should be (0)
         }
         "Player can have hole cards" in {
           val cd = new CardDeck
