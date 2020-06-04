@@ -26,7 +26,6 @@ case class TUI() extends Observable {
   def getChoice: Int = {
     val input = scala.io.StdIn.readLine().split(" ")
     input(0) match {
-      case "q" => -2
       case "h" => -1
       case "call" => 1
       case "check" => 2
