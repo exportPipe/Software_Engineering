@@ -1,4 +1,6 @@
-package Poker
+package Poker.control
+
+import Poker.model.Player
 
 case class GameOptions(gameTable: GameTable) {
 

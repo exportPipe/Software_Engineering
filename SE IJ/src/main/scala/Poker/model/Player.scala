@@ -1,4 +1,4 @@
-package Poker
+package Poker.model
 
 case class Player(var $credit: Int = 500, var $currBet: Int = 0, var isActive: Boolean = true,
                   var holeCards: List[Card] = Nil) {

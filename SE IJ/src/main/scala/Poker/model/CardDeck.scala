@@ -1,4 +1,4 @@
-package Poker
+package Poker.model
 
 case class CardDeck() {
 
@@ -15,6 +15,10 @@ case class CardDeck() {
     ret
   }
 
-  def reNew(): Unit = cards = List.from(util.Random.shuffle(cardSeq))
+  def reNew(): Boolean = {
+    cards = List.from(util.Random.shuffle(cardSeq))
+    if (cards != Nil) return true
+    false
+  }
 }
 

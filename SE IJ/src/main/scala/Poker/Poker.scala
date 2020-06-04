@@ -1,5 +1,7 @@
 package Poker
-
+import view.TUI
+import control.GameTable
+import model.{Player, CardDeck}
 object Poker {
   def main(args: Array[String]): Unit = {
     println("Texas Holdem Poker by Niklas and Paul")

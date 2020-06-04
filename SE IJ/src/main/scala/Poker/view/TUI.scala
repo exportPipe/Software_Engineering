@@ -1,6 +1,10 @@
-package Poker
+package Poker.view
 
-case class TUI() {
+import Poker.model.Player
+import Poker.control.GameTable
+import Poker.utils.Observable
+
+case class TUI() extends Observable {
 
   def initPlayer(): Array[Player] = {
     println("\nEnter number of player")
@@ -8,8 +12,9 @@ case class TUI() {
     printf(
       "Game starts with %d player", numberPlayer
     )
-    var plr = new Array[Player](numberPlayer)
+    val plr = new Array[Player](numberPlayer)
     for (i <- 0.until(numberPlayer)) plr(i) = new Player()
+    notifyObserver()
     plr
   }
 
@@ -46,10 +51,11 @@ case class TUI() {
       s" (with ${gameTable.beforeActive(gameTable.choicePlayer).getCurrBet})")
   }
 
-  def printHelp(): Unit = {
+  def printHelp(): Boolean = {
     println("---\toptions:\ncall\t->\tmatch the current bet amount made by a previous player " +
       "(if equal, automatic check instead)\ncheck\t->\tpass the action to the next player " +
       "(if bet amount equal to previous)\nfold\t->\tdiscard your hand and become inactive for this round" +
       "\nraise <amount>\t->\traise to a specified integer amount\n")
+    true
   }
 }

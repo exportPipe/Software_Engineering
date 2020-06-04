@@ -1,6 +1,11 @@
-package Poker
+package Poker.control
 
-class GameTable (player: Array[Player], cards: CardDeck, tui: TUI) {
+import Poker.model.{CardDeck, Player}
+import Poker.view.TUI
+import Poker.utils.Observable
+
+
+class GameTable (player: Array[Player], cards: CardDeck, tui: TUI) extends Observable {
   var $S: Int = 10
   var $B: Int = 20
   var pot = 0
@@ -34,6 +39,7 @@ class GameTable (player: Array[Player], cards: CardDeck, tui: TUI) {
     checkPlayerCredits()
     if (!options.bet(smallBlind, $S) || !options.bet(bigBlind, $B)) return false
     tui.printVars(this)
+    notifyObserver()
     roundManager()
     true
   }
@@ -44,6 +50,7 @@ class GameTable (player: Array[Player], cards: CardDeck, tui: TUI) {
         choicePlayer = nextActive(choicePlayer)
         count += 1
         tui.printVars(this)
+        notifyObserver()
         roundManager()
       } else {
         tui.printVars(this)
@@ -57,18 +64,17 @@ class GameTable (player: Array[Player], cards: CardDeck, tui: TUI) {
     printf("\nEnter \"h\" for help\n")
     val pick = tui.getChoice
     pick match {
-      case -2 => System.exit(0)
       case -1 => tui.printHelp()
-      case 1 => return options.call(player)
-      case 2 => return options.check(player)
-      case 3 => return options.fold(player)
-      case _ => return options.raise(player, pick)
+      case 1 => options.call(player)
+      case 2 => options.check(player)
+      case 3 => options.fold(player)
+      case _ => options.raise(player, pick)
     }
-     false
   }
 
   def checkPlayerCredits(): Unit = {
     for (x <- player)
       if (x.getCredit <= 0) x.setActive(false)
   }
+  notifyObserver()
 }

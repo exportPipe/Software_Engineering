@@ -1,4 +1,4 @@
-package Poker
+package Poker.model
 
 case class Card(rank: Int, suit: Int) extends Comparable[Card] {
   override def toString: String = {

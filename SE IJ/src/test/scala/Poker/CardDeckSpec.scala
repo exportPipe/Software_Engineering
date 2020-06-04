@@ -1,5 +1,6 @@
 package Poker
 
+import model.{Card, CardDeck}
 import org.scalatest._
 import org.scalatest.matchers.should.Matchers
 
