@@ -1,4 +1,3 @@
-[warn] scala-library-2.13.2-sources.jar no longer exists at /Users/Pipe/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.2/scala-library-2.13.2-sources.jar
-[debug] "not up to date. inChanged = false, force = false
-[debug] Updating ProjectRef(uri("file:/Users/Pipe/Documents/HTWG%20Informatik/SS20/Software%20Engineerimng/SE%20IJ/"), "se-ij")...
-[debug] Done updating ProjectRef(uri("file:/Users/Pipe/Documents/HTWG%20Informatik/SS20/Software%20Engineerimng/SE%20IJ/"), "se-ij")
+[debug] "not up to date. inChanged = true, force = false
+[debug] Updating ProjectRef(uri("file:/C:/Users/User/IdeaProjects/Software_Engineering/SE%20IJ/"), "se-ij")...
+[debug] Done updating ProjectRef(uri("file:/C:/Users/User/IdeaProjects/Software_Engineering/SE%20IJ/"), "se-ij")
